@@ -20,7 +20,28 @@ public class QueenBoard{
 	return solveH(0);
     }
 
+    private void addQueen(int r, int c){
+	board[r][c] = 1;
+    }
+
+    private void removeQueen(int r, int c){
+	board[r][c] = 0;
+    }
+
+    public void updateBoard(int r, int c){
+	int counter = 1;
+	while(r < board.length || c < board.length){
+	    board[
+    }
+    // nothing = 0, queen = 1, conflict == -1
     private boolean solveH(int col){
+	int x = col;
+	int counter = 0;
+	while (counter < board.length){
+	    if (board[x][counter] == 1){
+		updateBoard[x][counter];
+	    }
+	    
 	return false;
     }
 
