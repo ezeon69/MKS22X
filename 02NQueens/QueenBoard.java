@@ -15,23 +15,40 @@ public class QueenBoard{
      *final configuration of the board after adding 
      *all n queens. Uses solveH
      */
-    public boolean solve()
-    {
-	return solveH(0);
+    public void solve(){
+	solveH(0);
     }
 
     private void addQueen(int r, int c){
-	board[r][c] = 1;
+	if (board[r][c] == 0){
+	    board[r][c] = 1;
+	    for(int col = c; col < board.length; col++){
+		board[r][col] = -1;
+	    }
+	    for(int row = r, col = c; col < board.length && row < board.length; col++, row++){
+		board[row][col] = -1;
+	    }
+	    for(int row = r, col = c; col < board.length && row > 0; col++, row--){
+		board[row][col] = -1;
+	    }	    
+	}
     }
 
     private void removeQueen(int r, int c){
-	board[r][c] = 0;
+        if (board[r][c] == 1){
+	    board[r][c] = 0;
+	    for(int col = c; col < board.length; col++){
+		board[r][col] = 0;
+	    }
+	    for(int row = r, col = c; col < board.length && row < board.length; col++, row++){
+		board[row][col] = 0 ;
+	    }
+	    for(int row = r, col = c; col < board.length && row > 0; col++, row--){
+		board[row][col] = 0 ;
+	    }	    
+	}
     }
-
-    public void updateBoard(int r, int c){
-	int counter = 1;
-	while(r < board.length || c < board.length){
-	    board[
+	
     }
     // nothing = 0, queen = 1, conflict == -1
     private boolean solveH(int col){
