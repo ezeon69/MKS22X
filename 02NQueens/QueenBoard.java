@@ -48,8 +48,6 @@ public class QueenBoard{
 	    }	    
 	}
     }
-	
-    }
     // nothing = 0, queen = 1, conflict == -1
     private boolean solveH(int col){
 	int x = col;
