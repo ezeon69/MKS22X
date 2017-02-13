@@ -48,18 +48,22 @@ public class QueenBoard{
 	    }	    
 	}
     }
+
     // nothing = 0, queen = 1, conflict == -1
     private boolean solveH(int col){
 	int x = col;
 	int counter = 0;
 	while (counter < board.length){
-	    if (board[x][counter] == 1){
-		updateBoard[x][counter];
-	    }
-	    
+	    if (board[x][counter] == 0){
+	        addQueen[counter][col];
+		return solveH(col+1);
+	    }	    
 	return false;
+	}
     }
+    public void countSolutions(){
 
+    }
     /**
      *@return the number of solutions found, or -1 if the board was never solved.
      *The board should be reset after this is run.    
