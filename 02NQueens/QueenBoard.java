@@ -51,15 +51,22 @@ public class QueenBoard{
 
     // nothing = 0, queen = 1, conflict == -1
     private boolean solveH(int col){
-	int x = col;
-	int counter = 0;
-	while (counter < board.length){
-	    if (board[x][counter] == 0){
-	        addQueen[counter][col];
-		return solveH(col+1);
-	    }	    
-	return false;
+        if (col >= board.length){
+	    solutionCount++;
+	    return true;
 	}
+        for (int row =  0; row < board.length; row++){
+	    if (board[row][col] == 0){
+		addQueen(row,col);
+		if solveH(col + 1){
+			return true;
+		    }
+		else{
+		    removeQueen{row,col};
+		}
+	    }
+	}
+	return false;	
     }
     public void countSolutions(){
 
