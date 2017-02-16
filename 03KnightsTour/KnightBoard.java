@@ -46,5 +46,11 @@ public class KnightBoard{
 	return total;
     }
 
+    public static void main(String[]args){
+	KnightBoard kb = new KnightBoard(7,7);
+	kb.solve();
+        String asd = kb.toString();
+	System.out.println(asd);
+    }
 }
     
