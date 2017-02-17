@@ -11,10 +11,10 @@ public class KnightBoard{
 
     // level is the # of the knight
     private boolean solveH(int row,int col,int level){
-	if ((row < 0) || (col < 0) || (row > board.length) || (col > board.length)){
+	if ((row < 0) || (col < 0) || (row >= board.length) || (col >= board[0].length)){
 	    return false;
 	}
-	if (level > (row * col)){
+	if (level > (board.length * board[0].length)){
 	    return true;
 	}
 	if (board[row][col] == 0){
@@ -49,8 +49,7 @@ public class KnightBoard{
     public static void main(String[]args){
 	KnightBoard kb = new KnightBoard(7,7);
 	kb.solve();
-        String asd = kb.toString();
-	System.out.println(asd);
+        System.out.println(kb.toString());
     }
 }
     
