@@ -11,7 +11,7 @@ public class KnightBoard{
 
     // level is the # of the knight
     private boolean solveH(int row,int col,int level){
-	if ((row < 0) || (col < 0) || (row >= board.length) || (col >= board[0].length)){
+	if ((row < 0) || (col < 0) || (row+1 >= board.length) || (col+1 >= board[0].length)){
 	    return false;
 	}
 	if (level > (board.length * board[0].length)){
