@@ -9,40 +9,67 @@ public class KnightBoard{
 	solveH(0,0,1);
     }
 
+    private boolean noConflict(int row,int col) {
+	if ((row >= 0) && (col >= 0) && (row < board.length) && (col < board[0].length)&& (board[row][col] == 0)){
+	    return true;
+	}
+	return false;
+    }
+    
     // level is the # of the knight
     private boolean solveH(int row,int col,int level){
-	if ((row < 0) || (col < 0) || (row+1 >= board.length) || (col+1 >= board[0].length)){
-	    return false;
-	}
 	if (level > (board.length * board[0].length)){
 	    return true;
 	}
-	if (board[row][col] == 0){
+	if (noConflict(row,col)){
 	    board[row][col] = level;
-	    if (solveH(row+1,col+2,level+1) || solveH(row-1,col-2,level+1) || solveH(row-1,col+2,level+1) || solveH(row+1,col-2,level+1) || solveH(row+2,col+1,level+1) || solveH(row-2,col-1,level+1) || solveH(row+2,col-1,level+1) || solveH(row-2,col+1,level+1)){
+	    if (solveH(row + 1, col + 2, level + 1) ||
+		solveH(row + 2 ,col + 1, level + 1) ||
+		solveH(row + 1, col - 2, level + 1) ||
+		solveH(row - 1, col + 2, level + 1) ||
+		solveH(row - 2, col - 1, level + 1) ||
+		solveH(row - 1, col - 2, level + 1) ||
+		solveH(row + 2, col - 1, level + 1) ||
+		solveH(row - 2, col + 1, level + 1)) {
 		return true;
 	    }
 	    board[row][col] = 0;
-	    if (board[row+1][col] == 0){
-		solveH(row + 1,col,level + 1);
+	}
+	return false;
+    }
+    
+    public boolean doubleDigit() {
+	for (int r = 0; r<board.length;r++){
+	    for(int c= 0; c<board[0].length; c++) {
+		if (board[r][c] >= 10) {
+		    return true;
+		}
 	    }
 	}
 	return false;
     }
-
+    
     //blank if you never called solve or when there is no solution
     public String toString(){
 	String total = "";
-	for (int[]row : board){
-	    for (int col : row){
-		if (col < 10){
-		    total += " " + col;
+        boolean isDouble = doubleDigit();
+	for (int row = 0; row < board.length; row++){
+	    if (row >= 1){
+		total += "\n";
+	    }
+	    for (int col = 0; col < board[0].length; col++){
+		if (isDouble){
+		    if (board[row][col] < 10){
+			total += " " + board[row][col] + " ";
+		    }
+		    else{
+			total += board[row][col] + " ";
+		    }
 		}
 		else{
-		    total += "" + col;
+		    total += board[row][col] + " ";
 		}
 	    }
-	    total += "\n";
 	}
 	return total;
     }
