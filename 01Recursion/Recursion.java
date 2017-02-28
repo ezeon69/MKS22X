@@ -1,10 +1,10 @@
 public class Recursion {
 
-    public static String name() {
+    public static String name(){
 	return "Luo,Jiajun";
     }
     
-    public static double sqrt(double n) {
+    public static double sqrt(double n){
 	if (n < 0){
 	    throw new IllegalArgumentException();
 	}

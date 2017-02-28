@@ -28,6 +28,7 @@ public class Maze{
         int lineNumber = 1;
         while(inf.hasNextLine()){
             String line = inf.nextLine();
+	    if lineNumber = 
 	    if (line.contains("E")){
 		hasE = true;
 	    }

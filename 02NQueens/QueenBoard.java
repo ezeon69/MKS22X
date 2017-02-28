@@ -22,7 +22,7 @@ public class QueenBoard{
 
     private void addQueen(int row, int col){
         for (int counter = 0; counter < Math.pow(board.length,2); counter++){
-	    if (counter % board.length == col || counter / board.length == row || Math.abs(counter / board.length - row ) == Math.abs( counter % board.length - col)){
+	    if (counter % board.length == col || counter / board.length == row || Math.abs(counter / board.length - row ) == Math.abs(counter % board.length - col)){
 		if (board[counter / board.length][counter % board.length] != -1){
 		    board[counter / board.length][counter % board.length]++;
 		}
