@@ -23,11 +23,12 @@ public class Maze{
 	boolean hasS = false;
 	boolean topHash = false;
 	boolean bottomHash = false;
-        File infile = new File(filename);// can be a path"/full/path/to/file.txt" 
+        File text = new File(filename);// can be a path"/full/path/to/file.txt" 
         Scanner inf = new Scanner(text);
-        int lineNumber = 1;
+        int lineNumber = 0;
         while(inf.hasNextLine()){
             String line = inf.nextLine();
+	    if (lineNumber == 0 || lineNumber == 
 	    if (line.contains("E")){
 		hasE = true;
 	    }
