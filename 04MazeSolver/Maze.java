@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-import java.lang*;
+import java.lang.*;
 
 public class Maze{
 
@@ -30,12 +30,12 @@ public class Maze{
 	    }
 	    int rows = lineNumber;
 	    maze = new char[rows][cols];
-	    in = new Scanner(text);
+	    Scanner in = new Scanner(text);
 	    int pos = 0;
-	    while (text.hasNextLine()){
-		String line = text.NextLine();
-		char[] arrayChars = line.toCharArray();
-		maze[pos] = charArray;
+	    while (in.hasNextLine()){
+		String line = in.nextLine();
+		char[] chars = line.toCharArray();
+		maze[pos] = chars;
 		pos++;
 	    }
 	    String fileText = toString();
@@ -71,12 +71,26 @@ public class Maze{
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public boolean solve(){
-	int startr=-1,startc=-1;
+	int[] startLocation = findStart();
 	//Initialize starting row and startint col with the location of the S. 
-	maze[startr][startc] = ' ';//erase the S, and start solving!
-	return solve(startr,startc);
+	maze[startLocation[0]][startLocation[1]] = ' ';//erase the S, and start solving!
+	return solve(startLocation[0],startLocation[1]);
     }
 
+    private int[] findStart(){
+	for (int row = 0; row < maze.length; row++) {
+	    for (int col = 0; col < maze[row].length; col++) {
+		if (maze[row][col] == 'S'){
+		    int[] startLocation = new int[2];
+		    startLocation[0] = row;
+		    startLocation[1] = col;
+		    return startLocation;
+		}
+	    }
+	}
+	int[] placeholder = {-1,-1};
+	return placeholder;
+    }
     /*
       Recursive Solve function:
 
@@ -92,12 +106,31 @@ public class Maze{
     */
     private boolean solve(int row, int col){
         if(animate){
-            System.out.println("\033[2J\033[1;1H"+this);
+            System.out.println("\033[2J\033[1;1H" + this);
             wait(20);
         }
-
+	if (maze[row][col] == 'E'){
+	    return true;
+	}
+	if (maze[row][col] == ' '){
+	    maze[row][col] = '@';
+	    if (solve(row+1,col) || solve(row,col+1) || solve(row-1,col) || solve(row,col-1)){
+		return true;
+	    }
+	    maze[row][col] = '.';
+	}
         //COMPLETE SOLVE
         return false; //so it compiles
     }
 
+    public String toString(){
+	String total = "";
+	for (int row = 0; row < maze.length; row++){
+	    total += "\n";
+	    for (int col = 0; col < maze.length; col++){
+		total += maze[row][col];
+	    }
+	}
+	    return total;
+    }
 }
