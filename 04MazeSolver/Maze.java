@@ -18,30 +18,34 @@ public class Maze{
       3. When the file is not found OR there is no E or S then: print an error and exit the program.
     */
 
-    public Maze(String filename) throws FileNotFoundException{
-	boolean hasE = false;
-	boolean hasS = false;
-	boolean topHash = false;
-	boolean bottomHash = false;
-        File text = new File(filename);// can be a path"/full/path/to/file.txt" 
-        Scanner inf = new Scanner(text);
-        int lineNumber = 0;
-        while(inf.hasNextLine()){
-            String line = inf.nextLine();
-	    if (lineNumber == 0 || lineNumber == 
-	    if (line.contains("E")){
-		hasE = true;
+    public Maze(String filename){
+	try{
+	    File text = new File(filename);// can be a path"/full/path/to/file.txt" 
+	    Scanner inf = new Scanner(text);
+	    int lineNumber = 1;
+	    int cols = inf.nextLine().length();
+	    while(inf.hasNextLine()){
+	        inf.nextLine();
+		lineNumber++;
 	    }
-	    if (line.contains("S")){
-		hasS = true;
+	    int rows = lineNumber;
+	    maze = new char[rows][cols];
+	    in = new Scanner(text);
+	    int pos = 0;
+	    while (text.hasNextLine()){
+		String line = text.NextLine();
+		char[] arrayChars = line.toCharArray();
+		maze[pos] = charArray;
+		pos++;
 	    }
-            lineNumber++;
+	    String fileText = toString();
+	    if (fileText.indexOf('S') == -1 || fileText.indexOf('E') == -1){
+		throw new IllegalArgumentException("Maze has no start or end");
+	    }
 	}
-	int col = line.length;
-	int row = lineNumber;
-	
-	
-	
+	catch (Exception e){
+	    System.out.println("error");
+	}	
     }
 
     private void wait(int millis){ //ADDED SORRY!
