@@ -1,29 +1,42 @@
 public class QuickSelect{
-
-    public static int partition(int[] ary, int start, int end){
+    
+    public static int quickselect(int[] data, int k){
+        if (data.length == 1){
+	    return data[0];
+	}
+	
+	
+    }
+    
+    
+    public static int partition(int[] data, int start, int end){
 	int based = end - 1;
-	float randomFloat = (Math.random() * ary.length);
+	double randomFloat = (Math.random() * data.length);
 	int random = (int) randomFloat;
-	int pivotPoint = ary[randomIndex];
+	int pivotPoint = data[random];
 	int temp = 0;
 	
-        swap(random, based, ary);
+        swap(random, based, data);
 
 	int part = start;
 	for (int counter = start; counter < end - 1; counter++){
-	    if (ary[counter] < ary[end - 1]){
-		swap(part,counter,ary);
+	    if (data[counter] < data[end - 1]){
+		swap(part,counter,data);
 		part++;
 	    }
 	}
-	swap(part,based,ary);
+
+	swap(part,based,data);
 	return part;
     }
 	    
-    private static void swap(int x, int y, int[] ary){
-        int temp = ary[x];
-        ary[x] = ary[y];
-        ary[y] = temp;
+    private static void swap(int x, int y, int[] data){
+        int temp = data[x];
+        data[x] = data[y];
+        data[y] = temp;
     }
+    
+    public static void main
+    
 }
 	
