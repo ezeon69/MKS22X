@@ -1,19 +1,21 @@
+import java.util.*;
+
 public class QuickSelect{
 
-    public static void quickselect(int[] data, int k){
-        System.out.println(quickselectH(data, k, 0, data.length));
-    }
+    /*public static void quickselect(int[] data, int k){
+      System.out.println(quickselectH(data, k, 0, data.length));
+	}*/
     
-    public static int quickselectH(int[] data, int k, int start, int end){
+    public static int quickselect(int[] data, int k, int start, int end){
 	int part = partition(data, 0, data.length);
 	
         if (part == k){
 	    return data[part];
 	}
 	if (part > k){
-	    return quickselectH(data, k, part - 1, end);
+	    return quickselect(data, k, part - 1, end);
 	}
-	return quickselectH(data, k, start, part - 1);
+	return quickselect(data, k, start, part - 1);
     }    
     
     public static int partition(int[] data, int start, int end){
@@ -31,6 +33,10 @@ public class QuickSelect{
 		swap(part,counter,data);
 		part++;
 	    }
+	    if (data[counter] == data[end - 1]){
+		part++;
+		break;
+	    }
 	}
 
 	swap(part,based,data);
@@ -41,6 +47,12 @@ public class QuickSelect{
         int temp = data[x];
         data[x] = data[y];
         data[y] = temp;
+    }
+    
+    public static void main(String[]args){
+	int[] ary = {3,8,1,2,7,3,4,3,3,3,3};
+	partition(ary,0,ary.length);
+	System.out.println(Arrays.toString(ary));
     }
     
 }
