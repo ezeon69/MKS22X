@@ -33,10 +33,6 @@ public class QuickSelect{
 		swap(part,counter,data);
 		part++;
 	    }
-	    if (data[counter] == data[end - 1]){
-		part++;
-		break;
-	    }
 	}
 
 	swap(part,based,data);
