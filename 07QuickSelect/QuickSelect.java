@@ -19,10 +19,9 @@ public class QuickSelect{
     }    
     
     public static int partition(int[] data, int start, int end){
-	int based = end - 1;
+	/*int based = end - 1;
 	double randomFloat = (Math.random() * data.length);
 	int random = (int) randomFloat;
-	int pivotPoint = data[random];
 	int temp = 0;
 	
         swap(random, based, data);
@@ -36,7 +35,22 @@ public class QuickSelect{
 	}
 
 	swap(part,based,data);
-	return part;
+	return part;*/
+
+	int pivot = data[start];
+
+	int i = start;
+	int j = end;
+	while (i <= j){
+	    if (data[i] < pivot){
+		i++;
+	    }
+	    else{
+		swap(i,j,data);
+		j--;
+	    }
+	}
+	swap(start,j,data);
     }
 	    
     private static void swap(int x, int y, int[] data){
@@ -46,7 +60,7 @@ public class QuickSelect{
     }
     
     public static void main(String[]args){
-	int[] ary = {3,8,1,2,7,3,4,3,3,3,3};
+	int[] ary = {8,1,2,7,4,3,6,5};
 	partition(ary,0,ary.length);
 	System.out.println(Arrays.toString(ary));
     }
