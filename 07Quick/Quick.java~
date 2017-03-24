@@ -47,7 +47,7 @@ public class QuickSelect{
     }
     
     public static void main(String[]args){
-	int[] ary = {8,1,2,7,4,3,6,5};
+	int[] ary = {8,1,2,7,4,3,6,5,3,3,3,3,3,3,3};
 	partition(ary,0,ary.length);
 	System.out.println(Arrays.toString(ary));
     }
