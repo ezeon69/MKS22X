@@ -3,31 +3,47 @@ import java.lang.*;
 
 public class Quick{
 
-    public static int quickselect(int[] data, int k, int start, int end){
-	int part = partition(data, 0, data.length);
+    public static void quicksort(int[] data){
+        quickSortH(data, 0, data.length - 1);
+    }
+
+    public static void quickSortH(int[]data, int start, int end){
+	if (start < end){
+	    int pivot = partition(data,start,end);
+	    quickSortH(data, pivot + 1, end);
+	    quickSortH(data, start, pivot - 1);
+	}
+    }
+    
+    public static int quickselect(int[] data, int k){
+        return quickSelectH(data, k, 0, data.length-1);
+    }
+    
+    public static int quickSelectH(int[] data, int k, int start, int end){
+	int part = partition(data, start, end);
 	
-        if (part == k){
-	    return data[part];
+        if (part > k){
+	    return quickSelectH(data, k, start, part - 1);
 	}
-	if (part > k){
-	    return quickselect(data, k, part - 1, end);
+	else if (part < k){
+	    return quickSelectH(data, k, part + 1, end);
 	}
-	return quickselect(data, k, start, part - 1);
+	return data[part];
     }    
     
     public static int partition(int[] data, int start, int end){
-	double randomFloat = (Math.random() * data.length);
-	int random = (int) randomFloat;
+        int random = start + (int) (Math.random() * (end - start));
+	int pivot = data[random];
 	
-	int pivot = data[start];
-	
-        swap(random,pivot,data);
+        swap(random,start,data);
 	
 	int lt = start;
 	int i = start;
 	int j = end;
 	while (i <= j){
 	    if (data[i] < pivot){
+		swap(i,lt,data);
+		i++;
 		lt++;
 	    }
 	    else if (data[i] == pivot){
@@ -38,8 +54,7 @@ public class Quick{
 		j--;
 	    }
 	}
-	swap(start,j,data);
-	return pivot;
+	return lt;
     }
 	    
     private static void swap(int x, int y, int[] data){
@@ -49,10 +64,9 @@ public class Quick{
     }
     
     public static void main(String[]args){
-	int[] ary = {8,1,2,7,4,3,6,5,3,3,3,3,3,3,3};
-	partition(ary,0,ary.length);
-	System.out.println(Arrays.toString(ary));
-    }
-    
+        int[] data = {4,7,5,1,2,8,3,6,9};
+        quicksort(data);
+	System.out.println(Arrays.toString(data));
+    }  
 }
 	
