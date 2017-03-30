@@ -15,10 +15,9 @@ public class MyLinkedList{
 	for(int counter = 0; counter < LNode.size(), counter++;){
 	    current.get(counter) = current.get(counter-1);
 	}
-	
 	current[0] = value;
 	start = current;
-	size ++;
+	size++;
 	return true;
     }
     
