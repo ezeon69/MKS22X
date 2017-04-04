@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyLinkedList{
     
     private LNode start;
@@ -9,9 +11,10 @@ public class MyLinkedList{
         start = new LNode();
     }
     
-    public class LNode{
-	private LNode next;
-	private int value;
+    private class LNode{
+        LNode prev;
+        LNode next;
+        int value;
 	
 	public LNode(){
 	}
@@ -21,42 +24,90 @@ public class MyLinkedList{
 	    next = null;
 	}
 	
-	public LNode(int val, LNode next){
+	public LNode(int val, LNode nextNode){
 	    value = val;
 	    next = nextNode;
 	}
+
+	public String toString(){
+	    return value + "";
+	}
 	
     }
-    private boolean add(int val){
+
+    public int size(){
+	return size;
+    }
+    
+    private LNode getNthNode(int n){
+	LNode current = start;
+	for (int counter = 0; counter < n; counter++){
+	    current = current.next;
+	}
+	return current;
+    }
+
+    private void addAfter(LNode location, LNode toBeAdded){
+
+    }
+
+    private void remove(LNode target){
+
+    }
+
+    public String toString(){
+	String total = "[";
+	LNode current = start;
+	for (int counter = 0; counter < size(); counter++){
+	    total += current.value;
+	    current = current.next;
+	}
+	total += "]";
+	return total;
+    }
+
+    public boolean add(int val){
 	if (size == 0){
 	    start = new LNode(val);
 	    size++;
 	}
 	else{
-	    end.next = LNode(val);
+	    end.next = new LNode(val);
 	}
 	size++;
 	return true;
     }
-    
-    private int size(){
-	return size;
+
+    public int get(int index){
+	return getNthNode(index).value;
     }
 
-    private int get(int index){
-	for (counter = 0; counter < index; counter++){
-	    Lnode current = start;
-	    current = current.next;
-	}
-	return current.value;
-    }
-
-    private int set(int index, int newValue){
-	for (counter = 0; counter < index; counter++){
-	    Lnode current = start;
+    public int set(int index, int newValue){
+	LNode current = start;
+	for (int counter = 0; counter < index; counter++){
 	    current = current.next;
 	}
         current.value = newValue;
 	return current.value;
     }
+
+    public int indexOf(int value){
+	LNode current = start;
+	for (int counter = 0; counter < size(); counter++){
+	    current = current.next;
+	    if (current.value == value){
+		return counter;
+	    }
+	}
+        return 0;
+    }
+
+    public int remove(int index){
+
+    }
+
+    public void add(int index,int value){
+
+    }
+    
 }
