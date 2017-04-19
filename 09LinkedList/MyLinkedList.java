@@ -156,7 +156,7 @@ public class MyLinkedList implements Iterable<Integer>{
     }
 
     public boolean add(int value){
-        addAfter(tail,new LNode(value));
+        addAfter(end,new LNode(value));
 	return true;
     }
 
@@ -197,6 +197,9 @@ public class MyLinkedList implements Iterable<Integer>{
     public void add(int index,int value){
         if (index == size){
 	    add(value);
+	}
+	if (index == 0){
+	    addAfter(start, new LNode(value));
 	}
 	else{
 	    addAfter(getNthNode(index - 1), new LNode(value));
