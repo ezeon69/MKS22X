@@ -54,7 +54,7 @@ public class MyLinkedList implements Iterable<Integer>{
         }
 
 	public boolean hasNext(){
-	    return currentNode != null;
+	    return current != null;
 	}
 
 	public Integer next(){
@@ -128,11 +128,11 @@ public class MyLinkedList implements Iterable<Integer>{
 	}
 	else if (target.prev == null){
             target.next.prev = null;
-            head = target.next;
+            start = target.next;
 	}
 	else if (target.next == null){
             target.prev.next = null;
-            tail = target.prev;
+            end = target.prev;
         }
 	else{
             target.prev.next = target.next;
@@ -148,14 +148,14 @@ public class MyLinkedList implements Iterable<Integer>{
             if (current != start) {
                 total += ", ";
             }
-            total += current.toString(true);
+            total += current.toString();
             current = current.next;
         }
 	total += "]";
 	return total;
     }
 
-    public boolean add(int val){
+    public boolean add(int value){
         addAfter(tail,new LNode(value));
 	return true;
     }
@@ -199,7 +199,7 @@ public class MyLinkedList implements Iterable<Integer>{
 	    add(value);
 	}
 	else{
-	    addBefore(getNthNode(index), new LNode(value));
+	    addAfter(getNthNode(index - 1), new LNode(value));
 	}
     }
 }
