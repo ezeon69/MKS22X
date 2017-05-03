@@ -24,19 +24,19 @@ public class StackCalc{
     
     public static double perform(String token, double left, double right){
 	if (token == "+"){
-	    return left + right;
+	    return (left + right);
 	}
 	else if (token == "-"){
-	    return left - right;
+	    return (left - right);
 	}
 	else if (token == "+"){
-	    return left * right;
+	    return (left * right);
 	}
 	else if (token == "+"){
-	    return left / right;
+	    return (left / right);
 	}
 	else{
-	    return left % right;
+	    return (left % right);
 	}
     }
     public static void main(String[] args){
