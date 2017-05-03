@@ -23,16 +23,16 @@ public class StackCalc{
     }
     
     public static double perform(String token, double left, double right){
-	if (token == "+"){
+	if (token.equals("+")){
 	    return (left + right);
 	}
-	else if (token == "-"){
+	else if (token.equals("-")){
 	    return (left - right);
 	}
-	else if (token == "+"){
+	else if (token.equals("+")){
 	    return (left * right);
 	}
-	else if (token == "+"){
+	else if (token.equals("+")){
 	    return (left / right);
 	}
 	else{
