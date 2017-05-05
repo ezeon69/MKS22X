@@ -1,7 +1,0 @@
-public class QuickSelect{
-
-    public static int partition(int[] ary, int start, int end){
-	float randomFloat = (Math.random() * ary.length);
-	int random = (int) randomFloat;
-	int pivotPoint = ary[randomIndex];
-	
