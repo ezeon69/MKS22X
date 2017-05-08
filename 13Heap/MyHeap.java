@@ -2,12 +2,12 @@ import java.util.*;
 
 public class MyHeap{
     
-    private List<String> data;
+    private ArrayList<String> data;
     private int size;
     private int max;
     
     public MyHeap(){
-	data = new List<String>;
+	data = new ArrayList<String>;
 	size = 0;
 	max = 1;
     }
@@ -17,7 +17,7 @@ public class MyHeap{
 	    new MyHeap();
 	}
 	else{
-	    data = new List<String>;
+	    data = new ArrayList<String>;
 	    size = 0;
 	    max = 0;
 	}
@@ -28,8 +28,8 @@ public class MyHeap{
     }
     
     public void add(String s){
-	data.add(s);
 	size++;
+	data.add(s);
 	pushUp();
     }
 
@@ -47,12 +47,33 @@ public class MyHeap{
     }
 
     private void pushUp(){
-	
+	int index = size();
+	while (index > 1){
+	    int parent = index / 2;
+	    if (data[parent] >= data[index]){
+		break;
+	    }
+	    swap(index, parent);
+	    index = parent;
+	}
     }
 
     private void pushDown(){
-	
+	int index = 1;
+	while (true){
+	    int child = index * 2;
+	    if (child > size()){
+		break;
+	    }
+	    if (child + 1 <= size()){
+		
+	    
     }
 
-
+    private void swap(int i, int j){
+	String temp = data[i];
+	data[i] = data[j];
+	data[j] = temp;
+    }
+    
 }
