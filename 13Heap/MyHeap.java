@@ -2,24 +2,22 @@ import java.util.*;
 
 public class MyHeap{
     
-    private ArrayList<String> data;
+    private String[] data;
     private int size;
-    private int max;
+    private static int max;
     
     public MyHeap(){
-	data = new ArrayList<String>;
-	size = 0;
-	max = 1;
+	data = new String[10];
+	size = 1;
     }
 
     public MyHeap(boolean t){
+	this();
 	if (t){
-	    new MyHeap();
+	    max = 1;
 	}
 	else{
-	    data = new ArrayList<String>;
-	    size = 0;
-	    max = 0;
+	    max = -1;
 	}
     }
     
@@ -28,17 +26,30 @@ public class MyHeap{
     }
     
     public void add(String s){
-	size++;
-	data.add(s);
+	if (size == data.length){
+	        resize();
+	    }
+        data[size] = s;
 	pushUp();
+	size++;
     }
-
+    
+    public void resize(){
+        int counter = 0;
+	String newArr[] = new String[data.length * 2];
+	while (counter < data.length){
+	    newArr[counter] = data[counter];
+	    counter += 1;
+	}
+	data = newArr;
+    }
+    
     public String remove(){
 	String total = peek();
-	data[0] = data[size];
+	data[1] = data[size - 1];
 	data[size] = null;
-	size--;
 	pushDown();
+	size--;
 	return total;
     }
 
@@ -50,7 +61,7 @@ public class MyHeap{
 	int index = size();
 	while (index > 1){
 	    int parent = index / 2;
-	    if (data[parent] >= data[index]){
+	    if (data[index].compareTo(data[parent]) >= 0){
 		break;
 	    }
 	    swap(index, parent);
@@ -60,20 +71,61 @@ public class MyHeap{
 
     private void pushDown(){
 	int index = 1;
-	while (true){
+	while (index < size()){
 	    int child = index * 2;
 	    if (child > size()){
 		break;
 	    }
+	    //take smallest child or left one
 	    if (child + 1 <= size()){
-		
-	    
+		child = findMin(child, child + 1);
+	    }
+	    if (data[index].compareTo(data[child]) <= 0){
+                break;
+	    }
+            swap(index,child);
+            index = child;
+	}
     }
 
+    //finds min of 2 numbers within array
+    private int findMin(int left, int right){
+        if (data[left].compareTo(data[right]) <= 0)
+            return left;
+        else{
+            return right;
+	}
+    }
+	    
     private void swap(int i, int j){
 	String temp = data[i];
 	data[i] = data[j];
 	data[j] = temp;
+    }
+
+    public String toString()
+    {
+        String output = "[";
+        for (int i = 0; i < size; i++) {
+            output += data[i] + ", ";
+        }
+        if (size > 1) {
+            output = output.substring(0, output.length() - 2);
+        }
+        return output + "]";
+    }
+
+    public static void main(String[] args)
+    {
+        MyHeap h = new MyHeap(true);
+        String[] test = { "a", "b", "c", "d", "e", "f", "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i", };
+        for (String s : test) {
+            h.add(s);
+            System.out.println(s);
+        }for (String s : test) {
+            h.remove();
+            System.out.println(h);
+        }
     }
     
 }
