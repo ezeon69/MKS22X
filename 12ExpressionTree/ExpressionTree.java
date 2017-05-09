@@ -57,16 +57,16 @@ public class ExpressionTree{
     }
     
     public double perform(char token, double left, double right){
-	if (token == '+'){
+	if (token.equals('+')){
 	    return left + right;
 	}
-	else if (token == '-'){
+	else if (token.equals('-')){
 	    return left - right;
 	}
-	else if (token == '*'){
+	else if (token.equals('*')){
 	    return left * right;
 	}
-	else if (token == '/'){
+	else if (token.equals('/')){
 	    return left / right;
 	}
 	else{
