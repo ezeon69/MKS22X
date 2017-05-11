@@ -102,30 +102,5 @@ public class MyHeap{
 	data[i] = data[j];
 	data[j] = temp;
     }
-
-    public String toString()
-    {
-        String output = "[";
-        for (int i = 0; i < size; i++) {
-            output += data[i] + ", ";
-        }
-        if (size > 1) {
-            output = output.substring(0, output.length() - 2);
-        }
-        return output + "]";
-    }
-
-    public static void main(String[] args)
-    {
-        MyHeap h = new MyHeap(true);
-        String[] test = { "a", "b", "c", "d", "e", "f", "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i",  "g", "h", "i", };
-        for (String s : test) {
-            h.add(s);
-            System.out.println(s);
-        }for (String s : test) {
-            h.remove();
-            System.out.println(h);
-        }
-    }
     
 }
