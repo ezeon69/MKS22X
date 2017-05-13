@@ -33,7 +33,9 @@ public class RunningMedian{
 	else if (left.size() > right.size()){
             return left.peek();
         }
-        return right.peek();
+	else{
+	    return right.peek();
+	}
     }
 
 }

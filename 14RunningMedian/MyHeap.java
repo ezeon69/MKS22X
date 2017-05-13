@@ -4,11 +4,12 @@ public class MyHeap{
     
     private Integer[] data;
     private int size;
-    private static int max;
+    private int max;
     
     public MyHeap(){
 	data = new Integer[10];
 	size = 1;
+	max = 1;
     }
 
     public MyHeap(boolean t){
@@ -22,14 +23,14 @@ public class MyHeap{
     }
     
     public int size(){
-	return size;
+	return size - 1;
     }
     
-    public void add(Integer s){
+    public void add(int value){
 	if (size == data.length){
 	        resize();
 	    }
-        data[size] = s;
+        data[size] = value;
 	pushUp();
 	size++;
     }
@@ -39,7 +40,7 @@ public class MyHeap{
         Integer newArr[] = new Integer[data.length * 2];
 	while (counter < data.length){
 	    newArr[counter] = data[counter];
-	    counter += 1;
+	    counter++;
 	}
 	data = newArr;
     }
@@ -47,54 +48,55 @@ public class MyHeap{
     public Integer remove(){
         Integer total = peek();
 	data[1] = data[size - 1];
-	data[size] = null;
 	pushDown();
 	size--;
 	return total;
     }
 
     public Integer peek(){
-	return data[0];
+	return data[1];
     }
 
     private void pushUp(){
-	int index = size();
-	while (index > 1){
+	int index = size;
+        while (index > 1 && data[index].compareTo(data[index / 2]) * max > 0){
 	    int parent = index / 2;
-	    if (data[index].compareTo(data[parent]) >= 0){
-		break;
-	    }
 	    swap(index, parent);
 	    index = parent;
 	}
     }
 
     private void pushDown(){
-	int index = 1;
-	while (index < size()){
-	    int child = index * 2;
-	    if (child > size()){
-		break;
-	    }
-	    //take smallest child or left one
-	    if (child + 1 <= size()){
-		child = findMin(child, child + 1);
-	    }
-	    if (data[index].compareTo(data[child]) <= 0){
-                break;
-	    }
-            swap(index,child);
-            index = child;
-	}
-    }
-
-    //finds min of 2 numbers within array
-    private int findMin(int left, int right){
-        if (data[left].compareTo(data[right]) <= 0)
-            return left;
-        else{
-            return right;
-	}
+        int index = 1;
+        while (2 * index + 1 < size){
+            boolean goLeft = data[2 * index].compareTo(data[2 * index + 1]) * max > 0;
+            if (goLeft){
+                if (data[index].compareTo(data[2 * index] ) * max < 0){
+                    swap(index, 2 * index);
+                    index = 2 * index;
+                }
+		else if (data[index].compareTo(data[2 * index + 1] ) * max < 0) {
+                    swap(index, 2 * index + 1);
+                    index = 2 * index + 1;
+                }
+		else{
+                    break;
+                }
+            }
+	    else{
+                if (data[index].compareTo(data[2 * index + 1] ) * max < 0){
+                    swap(index, 2 * index + 1);
+                    index = 2 * index + 1;
+                }
+		else if (data[index].compareTo(data[2 * index] ) * max < 0){
+                    swap(index, 2 * index);
+                    index = 2 * index;
+                }
+		else{
+                    break;
+                }
+            }
+        }
     }
 	    
     private void swap(int i, int j){
