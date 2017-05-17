@@ -10,16 +10,32 @@ public class Location implements Comparable<Location>{
     public Location(int r, int c, Location prev, int distToStart, int distToGoal, boolean a){
 	row = r;
 	col = c;
-	previous = previous;
+	previous = prev;
 	distanceToStart = distToStart;
 	distanceToGoal = distToGoal;
 	aStar = a;
     }
     
-    public int compareTo(Location Other){
-	
+    private boolean getAStar(){
+	return aStar;
     }
     
+    private int getDTS(){
+	return distanceToStart;
+    }
+
+    private int getDTG(){
+	return distanceToGoal;
+    }
     
+    public int compareTo(Location Other){
+	if (getAStar()){
+	    return (Integer.compareTo(getDTS() + getDTG(), Other.getDTS() + Other.getDTG()));
+	}
+	else{
+	    return (Integer.compareTo(getDTS(), Other.getDTS());
+		    }
+	}
+    }
     
 }
