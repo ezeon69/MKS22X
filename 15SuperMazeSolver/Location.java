@@ -4,25 +4,22 @@ public class Location implements Comparable<Location>{
     private int col;
     private Location previous;
     private int distanceToStart;
-
-    private int distToGoal(){
+    private int distanceToGoal;
+    private boolean aStar;
     
-    }
-
-    private boolean aStar(){
-
-    }
-
-    public Location(int r, int c, Location previous,  int distToStart, int distToGoal){
-	
-    }
-    
-    public Location(int r, int c, Location previous , int distToStart, int distToGoal, boolean aStar){
-
+    public Location(int r, int c, Location prev, int distToStart, int distToGoal, boolean a){
+	row = r;
+	col = c;
+	previous = previous;
+	distanceToStart = distToStart;
+	distanceToGoal = distToGoal;
+	aStar = a;
     }
     
     public int compareTo(Location Other){
-
+	
     }
-
+    
+    
+    
 }
