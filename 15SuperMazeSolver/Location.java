@@ -33,9 +33,8 @@ public class Location implements Comparable<Location>{
 	    return (Integer.compareTo(getDTS() + getDTG(), Other.getDTS() + Other.getDTG()));
 	}
 	else{
-	    return (Integer.compareTo(getDTS(), Other.getDTS());
-		    }
+	    return (Integer.compareTo(getDTS(), Other.getDTS()));
 	}
     }
-    
 }
+    
