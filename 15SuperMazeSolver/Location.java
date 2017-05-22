@@ -2,39 +2,61 @@ public class Location implements Comparable<Location>{
     
     private int row;
     private int col;
-    private Location previous;
-    private int distanceToStart;
-    private int distanceToGoal;
+    public Location previous;
+    private int distToStart;
+    private int distToGoal;
     private boolean aStar;
     
-    public Location(int r, int c, Location prev, int distToStart, int distToGoal, boolean a){
+    public Location(int r, int c, Location previous, int distToStart, int distToGoal, boolean aStar){
 	row = r;
 	col = c;
-	previous = prev;
-	distanceToStart = distToStart;
-	distanceToGoal = distToGoal;
-	aStar = a;
-    }
-    
-    private boolean getAStar(){
-	return aStar;
+        this.previous = previous;
+        this.distToStart = distToStart;
+        this.distToGoal = distToGoal;
+        this.aStar = aStar;
     }
     
     private int getDTS(){
-	return distanceToStart;
+	return distToStart;
     }
 
     private int getDTG(){
-	return distanceToGoal;
+	return distToGoal;
+    }
+
+     public int getRow(){
+        return row;
+    }
+
+    public int getCol(){
+        return col;
+    }
+
+    public int getPrevRow(){
+        return previous.getRow();
+    }
+
+    public int getPrevCol(){
+        return previous.getCol();
+    }
+
+    public boolean hasPrevious(){
+        return previous != null;
+    }
+
+    public String toString(){
+        return "(" + row + ", " + col + ")";
     }
     
     public int compareTo(Location Other){
-	if (getAStar()){
-	    return (Integer.compareTo(getDTS() + getDTG(), Other.getDTS() + Other.getDTG()));
+        int here = getDTG();
+	int there = Other.getDTG();
+	if (aStar){
+	    here += getDTS();
+	    there += Other.getDTS();
 	}
-	else{
-	    return (Integer.compareTo(getDTS(), Other.getDTS()));
-	}
+	return here - there;
     }
+    
 }
     
