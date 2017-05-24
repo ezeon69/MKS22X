@@ -56,12 +56,15 @@ public class MazeSolver{
                 f.add(new Location(path[0], path[1], l, distToStart(path), distToGoal(path), style == 3));
                 board.set(path[0], path[1], '?');
             }
-        }	
+        }
+	board.set(l.getRow(), l.getCol(), 'E');
+        l = l.previous;
+	
 	while (l.hasPrevious()){
             board.set(l.getRow(), l.getCol(), '@');
             l = l.previous;
         }
-        board.set(l.getRow(), l.getCol(), '@');
+        board.set(l.getRow(), l.getCol(), 'S');
     }
 
     private ArrayList<int[]> findPaths(Location l){

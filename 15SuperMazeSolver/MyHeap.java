@@ -1,106 +1,118 @@
-import java.util.*;
+public class MyHeap {
 
-public class MyHeap{
-    
-    private Location[] data;
+    private int O_CONST;
+
+    private Location[] ary;
     private int size;
-    private static int max;
-    
-    public MyHeap(){
-	data = new Location[10];
-	size = 1;
+
+    public MyHeap() {
+        ary = new Location[10];
+        size = 1;
+        O_CONST = 1;
     }
 
-    public MyHeap(boolean t){
-	this();
-	if (t){
-	    max = 1;
-	}
-	else{
-	    max = -1;
-	}
-    }
-    
-    public int size(){
-	return size;
-    }
-    
-    public void add(Location s){
-	if (size == data.length){
-	        resize();
-	    }
-        data[size] = s;
-	pushUp();
-	size++;
-    }
-    
-    public void resize(){
-        int counter = 0;
-	Location newArr[] = new Location[data.length * 2];
-	while (counter < data.length){
-	    newArr[counter] = data[counter];
-	    counter += 1;
-	}
-	data = newArr;
-    }
-    
-    public Location remove(){
-	Location total = peek();
-	data[1] = data[size - 1];
-	data[size] = null;
-	pushDown();
-	size--;
-	return total;
+    public MyHeap(boolean isMax) {
+        this();
+        if (isMax) {
+            O_CONST = 1;
+        } else {
+            O_CONST = -1;
+        }
     }
 
-    public Location peek(){
-	return data[0];
+    public void add(Location l)
+    {
+        if (size == ary.length) {
+            resize();
+        }
+        ary[size] = l;
+        pushUp();
+        size++;
     }
 
-    private void pushUp(){
-	int index = size();
-	while (index > 1){
-	    int parent = index / 2;
-	    if (data[index].compareTo(data[parent]) >= 0){
-		break;
-	    }
-	    swap(index, parent);
-	    index = parent;
-	}
+    private void pushUp()
+    {
+        int tracker = size;
+        while (tracker > 1 && ary[tracker].compareTo( ary[tracker / 2] ) * O_CONST > 0) {
+            swap(tracker, tracker / 2);
+            tracker = tracker / 2;
+        }
     }
 
-    private void pushDown(){
-	int index = 1;
-	while (index < size()){
-	    int child = index * 2;
-	    if (child > size()){
-		break;
-	    }
-	    //take smallest child or left one
-	    if (child + 1 <= size()){
-		child = findMin(child, child + 1);
-	    }
-	    if (data[index].compareTo(data[child]) <= 0){
-                break;
-	    }
-            swap(index,child);
-            index = child;
-	}
+    private void resize()
+    {
+        Location[] biggerAry = new Location[ary.length * 2];
+        for (int i = 0; i < ary.length; i++) {
+            biggerAry[i] = ary[i];
+        }
+        ary = biggerAry;
     }
 
-    //finds min of 2 numbers within array
-    private int findMin(int left, int right){
-        if (data[left].compareTo(data[right]) <= 0)
-            return left;
-        else{
-            return right;
-	}
+    public Location remove()
+    {
+        Location output = ary[1];
+        ary[1] = ary[size - 1];
+        pushDown();
+        size--;
+        return output;
     }
-	    
-    private void swap(int i, int j){
-	Location temp = data[i];
-	data[i] = data[j];
-	data[j] = temp;
+
+    private void pushDown()
+    {
+        int tracker = 1;
+        while (2 * tracker + 1 < size) {
+            boolean goLeft = ary[2 * tracker].compareTo(ary[2 * tracker + 1]) * O_CONST > 0;
+            if (goLeft) {
+                if (ary[tracker].compareTo( ary[2 * tracker] ) * O_CONST < 0) {
+                    swap(tracker, 2 * tracker);
+                    tracker = 2 * tracker;
+                } else if (ary[tracker].compareTo( ary[2 * tracker + 1] ) * O_CONST < 0) {
+                    swap(tracker, 2 * tracker + 1);
+                    tracker = 2 * tracker + 1;
+                } else {
+                    break;
+                }
+            } else {
+                if (ary[tracker].compareTo( ary[2 * tracker + 1] ) * O_CONST < 0) {
+                    swap(tracker, 2 * tracker + 1);
+                    tracker = 2 * tracker + 1;
+                } else if (ary[tracker].compareTo( ary[2 * tracker] ) * O_CONST < 0) {
+                    swap(tracker, 2 * tracker);
+                    tracker = 2 * tracker;
+                }  else {
+                    break;
+                }
+            }
+        }
     }
-    
+
+    private void swap(int a, int b)
+    {
+        Location temp = ary[a];
+        ary[a] = ary[b];
+        ary[b] = temp;
+    }
+
+    public Location peek()
+    {
+        return ary[1];
+    }
+
+    public int size()
+    {
+        return size - 1;
+    }
+
+    public String toString()
+    {
+        String output = "[";
+        for (int i = 0; i < size; i++) {
+            output += ary[i] + ", ";
+        }
+        if (size > 1) {
+            output = output.substring(0, output.length() - 2);
+        }
+        return output + "]";
+    }
+
 }
