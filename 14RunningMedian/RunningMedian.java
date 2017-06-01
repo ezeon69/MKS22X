@@ -1,40 +1,45 @@
 public class RunningMedian{
 
-    public MyHeap left, right;
+    public MyHeap min, max;
 
     public RunningMedian(){
-	left = new MyHeap(true);
-	right = new MyHeap(false);
+	min = new MyHeap(false);
+	max = new MyHeap(true);
     }
 
     public void add(int value){
-	if (left.size() + right.size() == 0){
-            left.add(value);
+	if (min.size() == 0 && max.size() == 0){
+            max.add(value);
 	}
-	else if (value * 1.0 > getMedian()){
-            right.add(value);
+	else if ((double)value < getMedian()){
+            max.add(value);
+	    if (max.size() >= min.size() + 1) {
+		min.add(max.remove());
+	    }
+	    else if (min.size() >= max.size() + 1){
+		max.add(min.remove());
+	    }
         }
 	else{
-            left.add(value);
-        }
-
-        if (right.size() >= left.size() + 2) {
-            left.add(right.remove());
-	}
-	else if (left.size() >= right.size() + 2){
-            right.add(left.remove());
+            min.add(value);
+	    if (max.size() >= min.size() + 1) {
+		min.add(max.remove());
+	    }
+	    else if (min.size() >= max.size() + 1){
+		max.add(min.remove());
+	    }
         }
     }
 
     public double getMedian(){
-        if (left.size() == right.size()){
-            return (left.peek() + right.peek()) / 2.0;
+        if (min.size() == max.size()){
+            return (min.peek() + max.peek()) / 2.0;
         }
-	else if (left.size() > right.size()){
-            return left.peek();
+	else if (max.size() > min.size()){
+            return max.peek();
         }
 	else{
-	    return right.peek();
+	    return min.peek();
 	}
     }
 

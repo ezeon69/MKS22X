@@ -11,34 +11,37 @@ public class StackCalc{
     public static double eval(String s){
 	String[] tokens = s.split(" ");
 	Stack<Double> values = new Stack<Double>();
-	for(String token : tokens){
-	    if(isOp(token)){
-		values.push(perform(token,values.pop(),values.pop()));
+        for (int i = 0; i < tokens.length; i++){
+	    if (isOp(tokens[i])){
+		values.push(perform(tokens[i], values.pop(), values.pop()));
 	    }
 	    else{
-		values.push(Double.parseDouble(token));
+		values.push(Double.parseDouble(tokens[i]));
 	    }
-	} 
+	}
 	return values.pop();
-    }
+    } 
     
-    public static double perform(String token, double left, double right){
+    private static double perform(String token, Double left, Double right){
 	if (token.equals("+")){
-	    return (left + right);
+	    return right + left;
 	}
-	else if (token.equals("-")){
-	    return (left - right);
+	if (token.equals("-")){
+	    return right - left;
 	}
-	else if (token.equals("+")){
-	    return (left * right);
+	if(token.equals("*")){
+	    return right * left;
 	}
-	else if (token.equals("+")){
-	    return (left / right);
+	if(token.equals("/")){
+	    return right / left;
+	}
+	if(token.equals("%")){
+	    return right % left;
 	}
 	else{
-	    return (left % right);
-	}
+	    throw new IllegalArgumentException();}
     }
+    
     public static void main(String[] args){
 	System.out.println(StackCalc.eval("10 2 +"));//12.0
 	System.out.println(StackCalc.eval("10 2 -"));//8.0

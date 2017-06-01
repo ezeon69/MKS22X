@@ -16,46 +16,41 @@ public class Location implements Comparable<Location>{
         this.aStar = aStar;
     }
     
-    private int getDTS(){
+    public int getDTS(){
 	return distToStart;
     }
 
-    private int getDTG(){
+    public int getDTG(){
 	return distToGoal;
     }
 
-     public int getRow(){
+    public int getRow(){
         return row;
     }
 
     public int getCol(){
         return col;
     }
-
-    public int getPrevRow(){
-        return previous.getRow();
+    
+    public Location getPrev(){
+	return previous;
     }
-
-    public int getPrevCol(){
-        return previous.getCol();
-    }
-
+    
     public boolean hasPrevious(){
         return previous != null;
     }
 
     public String toString(){
-        return "(" + row + ", " + col + ")";
+        return "[" + row + ", " + col + "]";
     }
     
     public int compareTo(Location Other){
-        int here = getDTG();
-	int there = Other.getDTG();
-	if (aStar){
-	    here += getDTS();
-	    there += Other.getDTS();
+        if (aStar){
+	    return getDTS() + getDTG() - (Other.getDTS() + Other.getDTG());
 	}
-	return here - there;
+	else{
+	    return getDTG() - Other.getDTG();
+	}
     }
     
 }

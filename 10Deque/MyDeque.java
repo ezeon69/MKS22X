@@ -8,7 +8,7 @@ public class MyDeque{
     private int back;
     
     public MyDeque(){
-	data = new String[20];
+	data = new String[10];
 	size = 0;
 	front = 0;
 	back = 0;
@@ -21,13 +21,13 @@ public class MyDeque{
 	if (size == data.length) {
 	    expand();
 	}
-	if (size != 0) {
-	    if (front == 0) {
-		front = data.length - 1;
-	    }
-	    else{
-		front--;
-	    }
+        if (size == 0){
+	}
+	else if (front == 0){
+	    front = data.length - 1;
+	}
+	else{
+	    front = -1;
 	}
 	data[front] = s;
 	size++;
@@ -40,9 +40,13 @@ public class MyDeque{
 	if (size == data.length){
 	    expand();
 	}
-	if (size != 0){
+        if(size == 0){
+	}
+	else if (back == data.length - 1){
+	    back = 0;
+	}
+	else{
 	    back++;
-	    back = back % data.length;
 	}
 	data[back] = s;
 	size++;
@@ -53,8 +57,13 @@ public class MyDeque{
 	    throw new NoSuchElementException();
 	}
 	String total = data[front];
-	front++;
-	front = front % data.length;
+	data[front] = null;
+        if ((front == data.length - 1) || (size == 1)){
+	    front = 0;
+	}
+        else{
+	    front++;
+	}
 	size--;
 	return total;
     }
@@ -64,8 +73,12 @@ public class MyDeque{
 	    throw new NoSuchElementException();
 	}
 	String total = data[back];
+	data[back] = null;
         if (back == 0){
 	    back = data.length - 1;
+	}
+	else if (size == 1){
+	    back = 0;
 	}
 	else{
 	    back--;

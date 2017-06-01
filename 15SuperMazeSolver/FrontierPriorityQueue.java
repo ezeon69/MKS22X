@@ -16,12 +16,8 @@ public class FrontierPriorityQueue implements Frontier{
         return h.remove();
     }
 
-    public int size(){
-        return h.size();
-    }
-
-    public String toString(){
-        return h.toString();
+    public boolean hasNext(){
+	return h.size() != 0;
     }
     
 }

@@ -16,12 +16,8 @@ public class FrontierQueue implements Frontier{
         return dq.remove();
     }
 
-    public int size(){
-        return dq.size();
-    }
-
-    public String toString(){
-        return dq.toString();
+    public boolean hasNext(){
+	return dq.size() != 0;
     }
     
 }

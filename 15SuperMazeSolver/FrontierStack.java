@@ -11,7 +11,7 @@ public class FrontierStack implements Frontier{
     }
 
     public void add(Location l){
-        sk.add(l);
+        sk.push(l);
     }
 
     public Location next(){
@@ -22,8 +22,8 @@ public class FrontierStack implements Frontier{
         return sk.size();
     }
 
-    public String toString(){
-        return sk.toString();
+    public boolean hasNext(){
+	return sk.size() != 0;
     }
     
 }
