@@ -67,7 +67,6 @@ public class MazeSolver{
 		    System.out.println(board.toString(50));
 		}
 	    }
-
 	}
     }
 
@@ -100,10 +99,14 @@ public class MazeSolver{
         return board.toString();
     }
 
+    public String toString(int style){
+	return board.toString(style);
+    }
+
     public static void main(String[] args){
-        MazeSolver solve = new MazeSolver("data2.txt",true);
-        solve.solve(0);
-        System.out.println(solve.toString());
+        MazeSolver s = new MazeSolver("data2.txt",true);
+	s.solve(1);
+	String ans = s.toString();
     }
     
 }
